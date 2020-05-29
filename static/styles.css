@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Karla&display=swap');
+
+*{    
+    font-family: 'Karla', sans-serif;
+}
+
+body { 
+    padding-top: 80px; 
+    padding-bottom: 80px;
+}
+
+/* for the top and bottom nav */
+#sticky-head
+{
+    background-color: #ff8f66;
+    color: #fff;
+}
+#sticky-head h1{
+    font-family: 'Dancing Script', cursive;
+}
+#sticky-head i{
+    margin-top: 10px;
+    padding-right: 10px;
+}
+#sticky-head a{
+    color: #fff;
+}
+
+#sticky-footer {
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px #d6d6d6;
+    padding: 10px;
+}
+
+#sticky-footer a{
+    color: #3f3f3f;
+}
+
+#sticky-footer a.active{
+    color: #ff8f66;
+}
+
+/* for the login and signup pages */
+.error
+{
+    color: red;
+    margin-top: 30px;
+}
+
+.login-form a{
+    color: #2d2e2b
+}
+
+/* homepage */
+.wrapper{
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}
+
+.dessertImage{width: 95%;}
+
+.submit-button{
+    background-color: #ff8f66;
+    border-color: #ff8f66;
+}
+
+.wrapper .submit-button{
+    margin-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 20px;
+}
+
+.submit-button:hover{
+    border-color: #ff8f66;
+    background-color: #ff7949;
+}
+
+/* saved paged */
+.dessert-saved{
+    margin: 5px;
+    box-shadow: 0px 0px 10px 0px #d6d6d6;
+}
+
+.profilePic{
+    width: 100px;
+}
+
+.dessert-saved a{
+    color: #2d2e2b;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 525px){
+    .dessert-saved a{
+        font-size: 12px;
+    }
+    .profilePic{
+        width: 10vh;
+    }
+}
+
+.dessert-saved a i{
+    margin-top: 40px;
+}

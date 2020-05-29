@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% set active_page = "add" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <form class="form-container" enctype="multipart/form-data" action="/add" method="post">
+            <div class="form-group">
+                <label for="dessertName">Dessert Name</label>
+                <input class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="recipeLink">Recipe Link</label>
+                <input class="form-control" name="recipe" required>
+            </div>
+            <div class="form-group">
+                <label for="imageFile">Image File</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imageFile" aria-describedby="imageFile" name="photo" required>
+                    <label class="custom-file-label" for="imageFile">Choose file</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary submit-button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change',function(e){
+            var fileName = document.getElementById("imageFile").files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        })
+    </script>
+{% endblock %}

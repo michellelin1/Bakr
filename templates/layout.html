@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% set navigation_bar = [
+    ('/', 'index', 'fas fa-compass'),
+    ('/saved', 'saved', 'fas fa-bookmark'),
+    ('/add', 'add', 'fas fa-plus')
+] -%}
+
+{% set active_page = active_page|default('index') -%}
+
+{% block nav %}
+    <nav class="fixed-top" id="sticky-head">
+        <div class="d-flex justify-content-between">
+            <div class="p-2"></div> {# this divides the top into 3 sections even though nothing is in the 1st#}
+            <div><h1>Bakr</h1></div>
+            <div class="p-2"><a href="logout"><i class="fas fa-sign-out-alt fa-lg"></i></a></div>
+        </div>
+    </nav>
+
+    {% block content %}
+    
+    {% endblock %}
+
+    <nav class="fixed-bottom" id="sticky-footer">
+        <div class="d-flex justify-content-around">
+        {% for href, id, caption in navigation_bar %}
+            <div class="p-2"><a href="{{ href|e }}" {% if id == active_page %} class="active"{% endif %}><i class="{{ caption|e }} fa-lg"></i></a></div>
+        {% endfor %}
+        </div>
+    </nav>
+
+{% endblock %}

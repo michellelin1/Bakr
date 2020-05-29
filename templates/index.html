@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="wrapper">
+        {% if end %}
+            <h2 class="text-center">{{end}}</h2>
+        {% else %}
+            <h2 class="text-center">{{r.name}}</h2>
+            <img src="../static/images/{{r.imageFile}}" class=".img-fluid rounded mx-auto d-block dessertImage">
+            <form action="/" method="post">
+                <div class="d-flex justify-content-around">
+                    <input type="submit" name="submit" value="no" class="btn btn-primary btn-lg submit-button">
+                    <input type="submit" name="submit" value="yes" class="btn btn-primary btn-lg submit-button">
+                </div>
+            </form>
+        {% endif %}
+    </div>
+   
+
+{% endblock %}

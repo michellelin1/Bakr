@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block nav %}
+  <nav class="fixed-top text-center" id="sticky-head">
+    <h1>Bakr</h1>
+  </nav>
+  <div class="container-fluid">
+    <form class="login-form" action="/{{action}}" method="post">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" aria-describedby="emailHelp" name="email" required>
+          <div class="invalid-feedback">Enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password(6+ characters)</label>
+          <input type="password" class="form-control" name="pw" required>
+        </div>
+        {% if s %}
+          <p><a href="/signUp">Don't have an account? Sign up! 🎉</a></p>
+        {% endif %}
+        <button type="submit" class="btn btn-primary submit-button">Submit</button>
+    </form>
+    {% if error %}
+        <p class="padding-top-md error">{{error}}</p>
+    {% endif %}
+  </div>
+{% endblock %}
