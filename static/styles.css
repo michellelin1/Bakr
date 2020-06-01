@@ -109,3 +109,9 @@ body {
 .dessert-saved a i{
     margin-top: 40px;
 }
+
+.success
+{
+    color: #5cb85c;
+    margin-top: 30px;
+}
