@@ -1,7 +1,7 @@
 import pyrebase
 from functools import wraps
 from flask import Flask, redirect, render_template, session, request
-from flask_uploads import UploadSet, configure_uploads, IMAGES
+# from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 
 config = {
@@ -18,18 +18,20 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 auth = firebase.auth()
+storage = firebase.storage()
 
 app = Flask(__name__)
-photos = UploadSet('photos', IMAGES)
-app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
-configure_uploads(app, photos)
+# photos = UploadSet('photos', IMAGES)
+# app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
+# configure_uploads(app, photos)
 app.config['SECRET_KEY']="AIzaSyAkuv0IZZ7UcgU6tNhfwT0DP48MV4EYDPU"
 
 
 # im actually not 100% sure what does but the url to access data is wrong
 # found it on github
 # line 110 doesn't work with out it
-def noquote(s):
+# ***   turns out that it breaks storage.get_url()   ***
+def noquote(s, safe=None):
     return s
 pyrebase.pyrebase.quote = noquote
 
@@ -116,7 +118,8 @@ def getRecipeId(index):
         key=recipe[0].key()
     return key
 
-# i was going to upload the images to the cloud but     
+# i was going to upload the images to the cloud but i thought it would be slower so wanted to put it in the directory
+# UPDATE: i decided to upload to the cloud now bc heroku doesnt allow file uploads
 @app.route('/add', methods=['GET', 'POST'])
 @isAuthenticated
 def add():
@@ -124,14 +127,16 @@ def add():
         #gets all the info from the form and stores it in a dictionary 
         token = session['userToken']
         index = db.child('numRecipes').get(token).val()
-        fileName = request.form['name'].replace(' ', '-') +"."
-        imageFile = photos.save(request.files['photo'], name=fileName)
-        doc = {'name': request.form['name'], 'imageFile': imageFile, 
+        fileName = request.form['name'].replace(' ', '-')
+        # imageFile = photos.save(request.files['photo'], name=fileName)
+        img = storage.child('images/'+fileName+'.jpg').put(request.files['photo'], token)
+        imgLink = storage.child('images/'+fileName+'.jpg').get_url(img['downloadTokens'])
+        doc = {'name': request.form['name'], 'imageFile': imgLink.replace('images/', 'images%2F'),      # the noquote function causes the slash to remain but it's supposed to be %2F which is equibilet to a slash
                'recipeLink': request.form['recipe'], 'recipeIndex': index}
         db.child('recipes').push(doc, token)
-        #updates the total number of recipes
+        # updates the total number of recipes
         db.update({'numRecipes':index+1}, token)
-        return redirect('/')
+        return render_template('add.html', success="Your recipe has been upload and others can now view it. Thank you!!")
     return render_template('add.html')
 
 @app.route('/saved')

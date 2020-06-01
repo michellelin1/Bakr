@@ -11,7 +11,7 @@
 			{% for dessert in saved %}
 				<ul class="list-group">
 					<li class="list-group-item dessert-saved">
-						<img class="profilePic" src="../static/images/{{dessert.val().imageFile}}">
+						<img class="profilePic" src="{{dessert.val().imageFile}}">
 						<a href="{{dessert.val().recipeLink}}">{{dessert.val().name}}</a>
 						<a href="/remove/{{dessert.key()}}" style="float: right;"><i class="far fa-trash-alt"></i></a>
 					</li>

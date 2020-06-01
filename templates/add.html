@@ -14,14 +14,17 @@
                 <input class="form-control" name="recipe" required>
             </div>
             <div class="form-group">
-                <label for="imageFile">Image File</label>
+                <label for="imageFile">Image File (Preferably Square)</label>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="imageFile" aria-describedby="imageFile" name="photo" required>
-                    <label class="custom-file-label" for="imageFile">Choose file</label>
+                    <label class="custom-file-label" for="imageFile">Choose file...only jpg/jpeg allowed</label>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary submit-button">Submit</button>
         </form>
+        {% if success %}
+            <p class="padding-top-md error">{{success}}</p>
+        {% endif %}
     </div>
 
     <script>
