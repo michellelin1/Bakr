@@ -29,7 +29,7 @@ pylint==2.5.2
 Pyrebase==3.0.27
 pyrsistent==0.16.0
 python-jwt==2.0.1
-PyYAML==5.3.1
+PyYAML==5.4
 requests==2.11.1
 requests-toolbelt==0.7.0
 rsa==4.0
